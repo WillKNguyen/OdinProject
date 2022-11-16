@@ -1,0 +1,22 @@
+body{
+    background-color: beige;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1{
+    text-align: left;
+    font-size: 40px;
+}
+
+img{
+    width: 300px;
+    height: auto;
+}
+
+em{
+    font-size: large;
+}
+
+h4{
+    background-color: blanchedalmond;
+}
