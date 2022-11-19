@@ -1,2 +1,2 @@
 # OdinProject
-Collection of webdev small projects I did OdinProject
+Collection of small webdev projects I did for OdinProject
