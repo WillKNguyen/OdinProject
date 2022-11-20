@@ -60,7 +60,7 @@ ul.head{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: url("pics/background2.jfif");
+    background-image: url("pics/background.jpg");
     background-size: cover;
     height: 600px;
     align-items: center;
