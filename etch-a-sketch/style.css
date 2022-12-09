@@ -1,0 +1,44 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: antiquewhite;
+}
+
+.title{
+    font-weight: bolder;
+    justify-content: center;
+    display: flex;
+}
+
+.main {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px;
+}
+
+#options{
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    height: auto;
+    padding: 10px;
+    margin-left: -150px;
+    padding-top: 150px;
+    gap: 2px;;
+}
+
+.slider{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#canvas {
+    background-color: white;
+    width: 500px;
+    height: 500px;
+    border-color: rgb(77, 76, 76);
+    border-style: solid;
+}
+
