@@ -1,9 +1,9 @@
-var acceptKeys = ['1','2','3','4','5','6','7','8','9','0'];
-var operators = ['+', '-', '*', '/'];
-var prevInput = "";
-var operator = "";
-var input = "";
-var prevKey = "";
+let acceptKeys = ['1','2','3','4','5','6','7','8','9','0', '.', 'e', 'E'];
+let operators = ['+', '-', '*', '/'];
+let prevInput = "";
+let operator = "";
+let input = "";
+let prevKey = "";
 
 //button listeners
 document.addEventListener("keydown", function(e){
@@ -14,7 +14,7 @@ document.addEventListener("keydown", function(e){
         deleteNum();
     }
 
-    if (e.key === 'Enter' || e.key === '='){
+    if (e.key == 'Enter' || e.key == '='){
         equal();
     }
 
@@ -25,8 +25,6 @@ document.addEventListener("keydown", function(e){
     if (operators.includes(e.key)){
         insertOperator(e.key);
     }
-    console.log(e.key);
-    prevKey = e.key;
 });
 
 function setDisplay(string){
@@ -39,7 +37,6 @@ function clearInput(){
 }
 
 function calculate(input1, input2, operator){
-    console.log(input1, input2, operator);
     let result = 0
     let x = Number(input1);
     let y = Number(input2);
@@ -60,7 +57,7 @@ function calculate(input1, input2, operator){
         default:
             break;
     }
-    writeHistory(input1, input2, operator, result);
+    writeHistory(x, y, operator, result.toPrecision(3));
     return String(result);
 }
 
@@ -70,7 +67,9 @@ function clear(){
 }
 
 function writeHistory (input1, input2, operator, result){
-    let string  = input2 + ' ' + operator + ' ' + input1 + ' = ' + result;
+    let y = input2.toPrecision(5);
+    let x = input1.toPrecision(5);
+    let string  = y + ' ' + operator + ' ' + x + ' = ' + result;
     let results = document.querySelector('.results');
     let entry = document.createElement('div');
     entry.innerHTML = string;
@@ -83,15 +82,18 @@ function clearHistory() {
 }
 
 function appendNum(e) {
-    if (prevKey === 'Enter' || prevKey === '='){
+    if (prevKey == 'Enter' || prevKey == '='){
         clearInput();
     }
     if (operators.includes(prevKey)){
         prevInput = input;
         clearInput();
     }
+    if (e.toLowerCase() == 'e' && !acceptKeys.includes(prevKey)) {return};
+
     input += e;
     setDisplay(input);
+    prevKey = e;
 }
 
 function deleteNum(){
@@ -110,8 +112,8 @@ function reset(){
 
 function insertOperator(e){
     operator = e;
-    setDisplay(e);
-    prevKey = e;
+    setDisplay(operator);
+    prevKey = operator;
 }
 
 function equal() {
@@ -128,33 +130,16 @@ clearBtn.addEventListener('click', reset);
 const delBtn = document.querySelector('.delete');
 delBtn.addEventListener('click', deleteNum);
 
-const addBtn = document.querySelector('.add');
-addBtn.addEventListener('click', function(e) {
-    insertOperator('+');
-});
-
-const minusBtn = document.querySelector('.minus');
-minusBtn.addEventListener('click', function(e) {
-    insertOperator('-');
-});
-
-const multBtn = document.querySelector('.mult');
-multBtn.addEventListener('click', function(e) {
-    insertOperator('*');
-});
-
-const divBtn = document.querySelector('.divide');
-divBtn.addEventListener('click', function(e) {
-    insertOperator('/');
-});
-
 const enterBtn = document.querySelector('.equal');
 enterBtn.addEventListener('click', equal);
 
 
 const numbers = document.querySelectorAll('.number');
-numbers.forEach(number => number.addEventListener('click', function(e) {
+numbers.forEach(number => number.addEventListener('click', function() {
     appendNum(number.textContent);
-} ));
+}))
 
-
+const operBtns = document.querySelectorAll('.operator');
+operBtns.forEach(operand => operand.addEventListener('click',function(){
+    insertOperator(operand.textContent);
+}));
