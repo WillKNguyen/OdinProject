@@ -24,7 +24,7 @@ body {
 
 .display {
     background-color: whitesmoke;
-    font-size: 4vw;
+    font-size: 50px;
     text-overflow: ellipsis;
     word-wrap: break-word;
     margin-top: 30px;
@@ -78,5 +78,5 @@ button:hover{
 }
 
 .results{
-    overflow-y: scroll;
+    overflow-y: auto;
 }
