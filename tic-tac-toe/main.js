@@ -14,7 +14,7 @@ const playerFactory = (mark) => {
         writePrompt(`Player ${currentPlayer.mark}'s Turn`);
     }
     
-    return {mark, opponent, makeMove, writePrompt};
+    return {mark, opponent, makeMove};
 };
 
 var gameBoard = (function() {
@@ -109,11 +109,7 @@ var gameBoard = (function() {
         }
     }
 
-    return {
-        displayBoard: function(){
-            console.log(_theBoard.length);
-        }, createBoard
-    }
+    return {createBoard}
 })();
 
 var displayController = (function(){
