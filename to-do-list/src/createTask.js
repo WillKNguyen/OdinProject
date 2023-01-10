@@ -1,11 +1,8 @@
-export default function createTask(task){
+export default function createTask(task, currentProject){
     const tasklist = document.querySelector('.tasklist');
     
     const taskElement = document.createElement('div');
     taskElement.className = 'task';
-
-    const taskTopBar = document.createElement('div');
-    taskTopBar.className = 'task-top-bar';
   
     //option to change task name
     const taskName = document.createElement('input');
@@ -24,6 +21,8 @@ export default function createTask(task){
         option.innerText = priorities[i];
         taskPriority.appendChild(option);
     }
+    taskPriority.value = task.getPriority();
+
     taskPriority.addEventListener('change', function(e){
         task.setPriority(taskPriority.value);
     })
@@ -37,13 +36,21 @@ export default function createTask(task){
     })
 
     const taskProject = document.createElement('div');
-    taskProject.innerHTML = task.getProject();
+    taskProject.innerHTML = currentProject.getName();
 
-    taskTopBar.appendChild(taskName);
-    taskTopBar.appendChild(taskPriority);
-    taskTopBar.appendChild(taskProject);
-    taskTopBar.appendChild(taskDate);
-    taskElement.appendChild(taskTopBar);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = 'Delete';
+    deleteBtn.addEventListener('click', function(e){
+        taskElement.innerHTML = "";
+        currentProject.removeTaskFromProject(task);
+        console.log(currentProject.getTaskList());
+    });
+
+    taskElement.appendChild(taskName);
+    taskElement.appendChild(taskPriority);
+    taskElement.appendChild(taskProject);
+    taskElement.appendChild(taskDate);
+    taskElement.appendChild(deleteBtn);
 
     tasklist.appendChild(taskElement);
 }

@@ -36,7 +36,7 @@ body{
     width: 100%;
 }
 
-.task-top-bar{
+.task{
     display: flex;
     justify-content: space-between;
     align-items: center;
