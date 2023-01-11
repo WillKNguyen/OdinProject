@@ -1,4 +1,4 @@
-export default function createTask(task, currentProject){
+export default function createTask(task, currentProject, projectList){
     const tasklist = document.querySelector('.tasklist');
     
     const taskElement = document.createElement('div');
@@ -7,9 +7,10 @@ export default function createTask(task, currentProject){
     //option to change task name
     const taskName = document.createElement('input');
     taskName.type = 'text';
-    taskName.value = task.getName();
+    taskName.value = task.name;
     taskName.addEventListener('change', function(e){
-        task.setName(taskName.value);
+        task.name = taskName.value;
+        localStorage.setItem('projectList', JSON.stringify(projectList));
     })
 
     //option to change priority
@@ -21,29 +22,32 @@ export default function createTask(task, currentProject){
         option.innerText = priorities[i];
         taskPriority.appendChild(option);
     }
-    taskPriority.value = task.getPriority();
+    taskPriority.value = task.priority;
+
 
     taskPriority.addEventListener('change', function(e){
-        task.setPriority(taskPriority.value);
+        task.priority = taskPriority.value;
+        localStorage.setItem('projectList', JSON.stringify(projectList));
     })
 
     //option to change task deadline
     const taskDate = document.createElement('input');
     taskDate.type = 'date';
-    taskDate.value = task.getDate();
+    taskDate.value = task.date;
     taskDate.addEventListener('change', function(e){
-        task.setDate(taskDate.value);   
+        task.date = taskDate.value;   
+        localStorage.setItem('projectList', JSON.stringify(projectList));
     })
 
     const taskProject = document.createElement('div');
-    taskProject.innerHTML = currentProject.getName();
+    taskProject.innerHTML = currentProject.name;
 
     const deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = 'Delete';
     deleteBtn.addEventListener('click', function(e){
         taskElement.innerHTML = "";
         currentProject.removeTaskFromProject(task);
-        console.log(currentProject.getTaskList());
+        localStorage.setItem('projectList', JSON.stringify(projectList));
     });
 
     taskElement.appendChild(taskName);
@@ -51,6 +55,5 @@ export default function createTask(task, currentProject){
     taskElement.appendChild(taskProject);
     taskElement.appendChild(taskDate);
     taskElement.appendChild(deleteBtn);
-
     tasklist.appendChild(taskElement);
 }

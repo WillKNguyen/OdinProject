@@ -2,10 +2,6 @@ export default function projectFactory (pname){
     let name = pname;
     let taskList = [];
 
-    const getName = () => name;
-    const setName = (newname) => {name = newname};
-    const getTaskList = () => taskList;
-
     function addTaskToProject(task){
         taskList.push(task);
     };
@@ -17,5 +13,5 @@ export default function projectFactory (pname){
         }
     };
 
-    return {getName, setName, addTaskToProject, removeTaskFromProject, getTaskList}
+    return {name, taskList, addTaskToProject, removeTaskFromProject}
 };

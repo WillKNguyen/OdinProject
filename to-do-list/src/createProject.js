@@ -1,20 +1,47 @@
 import createTask from "./createTask.js";
 
-export default function createProject(project,container){
+export default function createProject(project,container, projectList){
     const projectlist = document.querySelector('.projectlist');
-
+    const projectContainer = document.createElement('div');
     const projectElement = document.createElement('div');
-    projectElement.innerHTML = project.getName();
+    projectElement.innerHTML = project.name;
     projectElement.addEventListener('click', function(e){
         const tasklist = document.querySelector('.tasklist');
         tasklist.innerHTML = "";
-        let list = project.getTaskList();
+
+        const projectName = document.createElement('h3');
+        projectName.innerHTML = project.name;
+
+        
+        tasklist.appendChild(projectName);
+
+        let list = project.taskList;
         for (let i = 0; i < list.length; i++) {
-            createTask(list[i], project);
+            createTask(list[i], project, projectList);
         }
         container.newProject = project; 
         container.currentProject = container.newProject;
     });
+    projectElement.click();
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = 'X';
 
-    projectlist.appendChild(projectElement);
+    deleteBtn.addEventListener('click', function(e){
+        let index = projectList.indexOf(project);
+        if (index > -1){
+            projectList.splice(index, 1);
+        }
+        projectContainer.innerHTML = "";
+        localStorage.setItem('projectList', JSON.stringify(projectList));
+    })
+
+    projectContainer.appendChild(projectElement);
+    projectContainer.appendChild(deleteBtn);
+
+    projectContainer.style.display = 'flex';
+    projectContainer.style.justifyContent = 'space-between';
+    projectContainer.style.alignItems = 'center';
+
+    projectlist.appendChild(projectContainer);
 }
