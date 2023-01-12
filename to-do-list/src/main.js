@@ -2,6 +2,7 @@ import createTask from "./createTask.js";
 import createProject from "./createProject.js";
 import taskFactory from "./taskFactory.js";
 import projectFactory from "./projectFactory.js";
+import './style.css';
 
 
 let defaultProject = projectFactory('Default')

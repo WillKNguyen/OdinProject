@@ -26,6 +26,9 @@ export default function createProject(project,container, projectList){
     
     const deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = 'X';
+    deleteBtn.style.backgroundColor = 'inherit';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.fontSize = 'inherit';
 
     deleteBtn.addEventListener('click', function(e){
         let index = projectList.indexOf(project);

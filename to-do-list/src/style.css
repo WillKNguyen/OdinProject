@@ -46,6 +46,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0.5em;
 }
 
 input, select{
@@ -55,9 +56,11 @@ input, select{
     background-color: inherit;
     border: none;
     font-size: inherit;
-
+    cursor: pointer;
 }
-
+button{
+    cursor: pointer;
+}
 .taskPrompt, .projPrompt{
     display: none;
 }
@@ -69,10 +72,12 @@ input, select{
 
 .addProjBtn, .addTaskBtn{
     background-color: rgb(182, 245, 182);
+
 }
 
 .cancelProjBtn, .cancelTaskBtn{
     background-color: rgb(224, 154, 154);
+
 }
 
 .openAddTask, .openAddProj{

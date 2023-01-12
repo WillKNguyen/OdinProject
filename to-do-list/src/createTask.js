@@ -43,7 +43,10 @@ export default function createTask(task, currentProject, projectList){
     taskProject.innerHTML = currentProject.name;
 
     const deleteBtn = document.createElement('button');
-    deleteBtn.innerHTML = 'Delete';
+    deleteBtn.innerHTML = 'X';
+    deleteBtn.style.backgroundColor = 'inherit';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.fontSize = 'inherit';
     deleteBtn.addEventListener('click', function(e){
         taskElement.innerHTML = "";
         currentProject.removeTaskFromProject(task);
