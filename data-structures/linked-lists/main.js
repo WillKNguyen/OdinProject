@@ -56,8 +56,9 @@ class LinkedList{
 
     pop(){
         if (this.numberOfNodes > 0){
-            this.tailNode = at(this.numberOfNodes - 2);
+            this.tailNode = this.at(this.numberOfNodes - 2);
             this.tailNode.nextNode = null;
+            this.numberOfNodes--;
         }
         else{
             console.log('linked list is empty');
@@ -72,6 +73,9 @@ class LinkedList{
             }
             while (node.value != value && node != null){
                 node = node.nextNode;
+                if (node == null){
+                    break;
+                }
                 if (node.value == value){
                     return true;
                 }
@@ -86,9 +90,12 @@ class LinkedList{
         if (node.value == value){
             return index;
         }
-        while(index < this.numberOfNodes && node.value != value){
+        while(node.value != value){
             node = node.nextNode;
             index++;
+            if (node == null){
+                break;
+            }
             if (node.value == value){
                 return index;
             }
@@ -121,7 +128,16 @@ console.log(ll);
 ll.append("jim");
 ll.append("john");
 ll.append("bob");
+ll.prepend("will")
 
 console.log(ll);
 console.log(ll.toString());
+console.log(ll.size());
+console.log(ll.at(1));
+ll.pop();
+console.log(ll.toString());
+
+console.log(ll.find('wil'))
+console.log(ll.contains('jim'))
+
 
