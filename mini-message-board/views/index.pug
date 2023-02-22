@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  table 
+    tr 
+      th Message 
+      th User 
+      th Added
+      each message in messages 
+        tr 
+          td #{message.text} 
+          td #{message.user} 
+          td #{message.added}
