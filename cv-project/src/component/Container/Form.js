@@ -5,8 +5,8 @@ import Personal from '../Personal';
 import Project from '../Project';
 
 function Form({expList, projList, eduList,
-    handlePersonalDetailsChange, handleExpChange, handleProjChange, handleEduChange,
-    onAddExp, onAddProj, onAddEdu}) {
+    handlePersonalDetailsChange, handleArrayChange,
+    onAddExp, onAddProj, onAddEdu, onDelete}) {
     return (
         <div className='input'>
             <Personal handlePersonalDetailsChange={handlePersonalDetailsChange}/>
@@ -17,7 +17,7 @@ function Form({expList, projList, eduList,
             ) : (
                 expList.map((item,index) => {
                     return(
-                        <Experience key={index} handleExpChange={handleExpChange} onAddExp={onAddExp}/>
+                        <Experience key={index} id={item.id}  index={index} handleArrayChange={handleArrayChange} onAddExp={onAddExp} onDelete={onDelete}/>
                     )
                 })
             )}
@@ -28,7 +28,7 @@ function Form({expList, projList, eduList,
             ) : (
                 projList.map((item,index) => {
                     return(
-                        <Project key={index} handleProjChange={handleProjChange} onAddProj={onAddProj}/>
+                        <Project key={index} id={item.id} index={index} handleArrayChange={handleArrayChange} onAddProj={onAddProj} onDelete={onDelete}/>
                     )
                 })
             )}
@@ -39,7 +39,7 @@ function Form({expList, projList, eduList,
             ) : (
                 eduList.map((item,index) => {
                     return(
-                        <Education key={index} handleEduChange={handleEduChange} onAddEdu={onAddEdu}/>
+                        <Education key={index} id={item.id} index={index} handleArrayChange={handleArrayChange} onAddEdu={onAddEdu} onDelete={onDelete}/>
                     )
                 })
             )}

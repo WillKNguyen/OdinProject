@@ -1,15 +1,11 @@
 import './App.css';
 import React, {Component} from "react";
-import Personal from './component/Personal';
-import Experience from './component/Experience';
-import Education from './component/Education';
-import Project from './component/Project';
-import DisplayPersonal from './component/DisplayPersonal';
-import DisplayExperience from './component/DisplayExperience';
-import DisplayEducation from './component/DisplayEducation';
-import DisplayProject from './component/DisplayProject';
 import Form from './component/Container/Form';
 import uniqid from "uniqid";
+import PersonalView from './component/VIew/PersonalView';
+import ExperienceList from './component/VIew/ExperienceList';
+import ProjectList from './component/VIew/ProjectList';
+import EducationList from './component/VIew/EducationList';
 
 
 class App extends Component {
@@ -61,44 +57,21 @@ class App extends Component {
       )
   }
 
-  handleExpChange = (e) => {
-    const {className, value} = e.target;
-
-    this.setState(prevState => ({
-      ...prevState,
-      exp: {
-        ...prevState.exp,
-        [className]: value
-      }}), () => {console.log(this.state)}
-      )
-  }
-
-  handleEduChange = (e) => {
-    const {className, value} = e.target;
-
-    this.setState(prevState => ({
-      ...prevState,
-      edu: {
-        ...prevState.edu,
-        [className]: value
-      }})
-      )
-  }
-
-  handleProjChange = (e) => {
-    const {className, value} = e.target;
-
-    this.setState(prevState => ({
-      ...prevState,
-      proj: {
-        ...prevState.proj,
-        [className]: value
-      }})
-      )
-  }
-
-  handleArrayChange = (property, ) => {
-
+  handleArrayChange = (propertyList, index) => {
+    return (e) => {
+      const {className, value} = e.target;
+      this.setState(prevState => ({
+        ...prevState,
+        [propertyList]: [
+          ...prevState[propertyList].slice(0, index),
+          {
+            ...prevState[propertyList][index],
+            [className]: value
+          },
+          ...prevState[propertyList].slice(index + 1)
+        ]
+      }), () => {console.log(this.state)})
+    }
   }
 
   onAddEdu = (e) => {
@@ -145,7 +118,15 @@ class App extends Component {
     }))
   };
 
+  onDelete = (propertyList, id) => {
+    this.setState(prevState => ({
+      ...prevState,
+      [propertyList] : [...prevState[propertyList]].filter((item) => item.id !== id)
+    }))
+  }
+
   render(){
+
     return(
       <div>
         <h1>CV Builder</h1>
@@ -153,19 +134,26 @@ class App extends Component {
           <Form 
           {...this.state}
           handlePersonalDetailsChange={this.handlePersonalDetailsChange} 
-          handleExpChange={this.handleExpChange}
-          handleProjChange={this.handleProjChange}
-          handleEduChange={this.handleEduChange}
+          handleArrayChange={this.handleArrayChange}
           onAddExp={this.onAddExp}
           onAddProj={this.onAddProj}
           onAddEdu={this.onAddEdu}
+          onDelete={this.onDelete}
           />
 
           <div id='output'>
-            <DisplayPersonal data={this.state.personal}/>
-            <DisplayExperience data = {this.state.exp}/>
-            <DisplayProject data = {this.state.proj}/>
-            <DisplayEducation data = {this.state.edu}/>
+            <PersonalView {...this.state.personal}/>
+            {this.state.expList.length > 0 ? (
+              <ExperienceList heading={'Work Experience'} expList={this.state.expList}/>
+            ) : (<div></div>)}
+
+            {this.state.projList.length > 0 ? (
+              <ProjectList heading={'Projects'} projList={this.state.projList}/>
+            ) : (<div></div>)}
+
+            {this.state.eduList.length > 0 ? (
+              <EducationList heading={'Education'} eduList={this.state.eduList}/>
+            ) : (<div></div>)}
           </div>
         </div>
       </div>
