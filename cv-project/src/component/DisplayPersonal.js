@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DisplayPersonal = (props) => {
-    const {firstname, lastname, email, phone, summary} = props;
+    const {firstname, lastname, email, phone, summary} = props.data;
     return (
         <div>
             <div>{firstname}</div>

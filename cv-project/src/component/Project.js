@@ -1,15 +1,14 @@
 import React from 'react';
 
-const Project = () => {
+const Project = (props) => {
     return (
         <div>
-            <h3>Project</h3>
-            <form>
-                <input type="text" id="projectname" placeholder='Project Name'/>
+            <form onChange={props.handleProjChange}>
+                <input type="text" className="projectname" placeholder='Project Name'/>
                 <p></p>
-                <input type="text" id="description" placeholder='Description'/>
+                <input type="text" className="description" placeholder='Description'/>
                 <p></p>
-                <button>Add</button>
+                <button onClick={props.onAddProj}>Add</button>
                 <button>Delete</button>
 
             </form>

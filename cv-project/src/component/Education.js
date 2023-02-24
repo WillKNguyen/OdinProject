@@ -1,19 +1,18 @@
 import React from 'react';
 
-const Education = () => {
+const Education = (props) => {
     return (
         <div>
-            <h3>Education</h3>
-            <form>
-                <input type="text" id="school" placeholder='School'/>
+            <form onChange={props.handleEduChange}>
+                <input type="text" className="school" placeholder='School'/>
                 <p></p>
-                <input type="text" id="degree" placeholder='Degree'/>
+                <input type="text" className="degree" placeholder='Degree'/>
                 <p></p>
-                <input type="date" id="start" placeholder='Start Date'/>
+                <input type="date" className="start" placeholder='Start Date'/>
                 <p></p>
-                <input type="date" id="end" placeholder='End Date'/>
+                <input type="date" className="end" placeholder='End Date'/>
                 <p></p>
-                <button>Add</button>
+                <button onClick={props.onAddEdu}>Add</button>
                 <button>Delete</button>
 
             </form>
